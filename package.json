@@ -1,0 +1,23 @@
+{
+  "name": "testing-postgres-node-jest",
+  "version": "1.0.0",
+  "description": "Example serverless api using Postgres, Node, and Jest",
+  "author": "alex@platter.dev",
+  "license": "MIT",
+  "keywords": [
+    "platter",
+    "postgres",
+    "testing",
+    "jest"
+  ],
+  "scripts": {
+    "build": "BRANCH=$HEAD platter build",
+    "watch": "netlify dev",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3",
+    "netlify-cli": "^3.23.1",
+    "platter": "^0.8.1"
+  }
+}
