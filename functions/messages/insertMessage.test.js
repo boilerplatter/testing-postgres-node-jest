@@ -1,8 +1,9 @@
 const child_process = require('child_process')
 const faker = require('faker')
-const Postgres = require('../../platter/postgres/node/TestingPostgresNodeJest')
+const path = require('path')
 const { ResponseError } = require('./response')
 const insertMessage = require('./insertMessage')
+const Postgres = require(path.join(__dirname, '../../', process.env.PLATTER_POSTGRES_CLIENT))
 
 const MOCK_MESSAGE_REQUEST = {
   text: 'this is legit text'
@@ -38,7 +39,7 @@ describe('Message insertMessage()', () => {
 })
 
 describe('Message database INSERT', () => {
-  const branch = faker.lorem.word()
+  const branch = faker.lorem.word(10)
   const postgres = new Postgres({ key: process.env.PLATTER_API_KEY, branch })
 
   beforeAll(() => {
@@ -54,7 +55,7 @@ describe('Message database INSERT', () => {
     const date = (new Date()).getDate()
     const createdAt = (new Date(response.created_at)).getDate()
 
-    expect(response.id).toBe(1)
+    expect(response.id).toBeGreaterThan(0)
     expect(createdAt).toBe(date)
   })
 

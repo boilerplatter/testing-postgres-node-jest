@@ -1,4 +1,5 @@
-const Postgres = require('../platter/postgres/node/TestingPostgresNodeJest')
+const path = require('path')
+const Postgres = require(path.join(__dirname, '../', process.env.PLATTER_POSTGRES_CLIENT))
 const postgres = new Postgres({ key: process.env.PLATTER_API_KEY })
 
 module.exports.up = async () => {
