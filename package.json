@@ -13,10 +13,15 @@
   "scripts": {
     "build": "BRANCH=$HEAD platter build",
     "watch": "netlify dev",
-    "test": "jest"
+    "test": "jest",
+    "migrate:up": "PLATTER_POSTGRES_CLIENT=platter/postgres/node/TestingPostgresNodeJest migrate up --store='@platter/migrate-store'",
+    "migrate:down": "PLATTER_POSTGRES_CLIENT=platter/postgres/node/TestingPostgresNodeJest migrate down --store='@platter/migrate-store'"
   },
   "devDependencies": {
+    "@platter/migrate-store": "^0.4.0",
+    "faker": "^5.5.3",
     "jest": "^26.6.3",
+    "migrate": "^1.7.0",
     "netlify-cli": "^3.23.1",
     "platter": "^0.8.2"
   },

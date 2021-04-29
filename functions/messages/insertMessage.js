@@ -13,11 +13,11 @@ const insertMessage = async (message, postgres) => {
     return insertedMessage
   } catch (error) {
     const payload = {
-      message: 'Internal Server Error',
+      message: 'Bad Request',
       error: error.toString()
     }
 
-    throw new ResponseError(payload, 500)
+    throw new ResponseError(payload, 400)
   }
 }
 
