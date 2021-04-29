@@ -15,7 +15,7 @@ Once you have an account, do the following:
 3. Authorize the `platter` CLI that was installed in step 2 to create Postgres instances on your behalf with `npx platter identity login`
 4. Create a new Postgres instance with:
 
-    ```shell
+    ```bash
     npx platter postgres create testing-postgres-node-jest \
     --platform node \
     --directory ./platter
@@ -23,15 +23,22 @@ Once you have an account, do the following:
 
 5. Create a `.env` file with a `PLATTER_API_KEY` from the [Platter developer dashboard](https://dashboard.platter.dev/keys) and a `PLATTER_POSTGRES_CLIENT` path that points to the path of your new Postgres client. If you used the command from step 4, `PLATTER_POSTGRES_CLIENT` will be `./platter/postgres/node/TestingPostgresNodeJest`. You can create that file with a single command like so:
 
-    ```shell
-    echo "PLATTER_API_KEY=<an API key from your user dashboard>\nPLATTER_POSTGRES_CLIENT=./platter/postgres/node/TestingPostgresNodeJest" > .env
+    ```bash
+    cat << EOF > .env
+    PLATTER_API_KEY=<an API key from your user dashboard>
+    PLATTER_POSTGRES_CLIENT=./platter/postgres/node/TestingPostgresNodeJest
+    EOF
     ```
 
 6. Run the migrations on your new instance with `npm run migrate:up`
 7. Start `platter watch` and `netlify dev` at the same time with `npm run watch` to test out your messages endpoint! It should accept `POST` requests at `localhost:8888/.netlify/functions/messages`. To insert a new message with `curl`, you would run:
 
-    ```shell
-    curl -s -X POST -H 'Content-Type: application/json' -d '{"text":"some message text"}' http://localhost:8888/.netlify/functions/messages
+    ```bash
+    curl -s \
+      -X POST \
+      -H 'Content-Type: application/json' \
+      -d '{"text":"some message text"}' \
+      http://localhost:8888/.netlify/functions/messages
     ```
 
 8. To run the test suite once, use `npm test`. To run the test suite in watch mode, use `npm run test:watch`.
